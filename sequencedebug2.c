@@ -158,7 +158,7 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int queries[5][3
     y=queries[i][2];
     if (queries[i][0] == 1){// Query type 1
         seqIndex=((x^lastAnswer)%n);
-        if(isfull[seqIndex]=false){
+        if(isfull[seqIndex]==false){
           sequenceArr[seqIndex]->value = y;
 	  isfull[seqIndex]=true;
         }
