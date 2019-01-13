@@ -26,9 +26,15 @@ typedef struct linkedList {
   struct linkedList *next;
 } linkedListStruct;
 
-struct linkedList *linkedListConstruct(int *value, int listSize) {
+
+//LinkedListConstruct initializes a linked list of size one with a set value
+//if you set listSize=1 and pass in the address of value
+//
+//otherwise you can pass in an array(haven't tested functionality
+struct linkedList * linkedListConstruct(int *value, int listSize) {
   struct linkedList *headPtr;
   struct linkedList *tempPtr;
+  int i;
   headPtr = malloc(sizeof(struct linkedList));
 
   if (listSize == 1) {
@@ -37,7 +43,7 @@ struct linkedList *linkedListConstruct(int *value, int listSize) {
   }
   else {
     tempPtr = headPtr;
-    for (int i = 0; i < listSize; i++) {
+    for ( i = 0; i < listSize; i++) {
       tempPtr->value = value[i];
       tempPtr->next = malloc(sizeof(struct linkedList));
       tempPtr = tempPtr->next;
@@ -97,6 +103,7 @@ int linkedListAccessValue(int index, struct linkedList *headPtr){
   while (currPtr != NULL && i<index) { /// traverse to index of linked list
     prevPtr = currPtr;
     currPtr = currPtr->next;
+    i++;
   }
   return currPtr->value;
 }
@@ -137,25 +144,28 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int queries[5][3
   int linkListIndex=0;
   struct linkedList * sequenceArr[n];
   int lastAnswer=0;
+  bool isfull[2]={false, false};
+  int i,j,k;
 
-  for (int k = 0; k < n; k++) {
+
+  for ( k = 0; k < n; k++) {
     sequenceArr[k] = linkedListConstruct(&lastAnswer, 1);
   }
 
-  for (int i = 0; i < queries_rows; i++) {
+  for ( i = 0; i < queries_rows; i++) {
     int seqIndex, x, y;
     x=queries[i][1];
     y=queries[i][2];
     if (queries[i][0] == 1){// Query type 1
         seqIndex=((x^lastAnswer)%n);
-        if(linkedListSize(sequenceArr[seqIndex])==1){
+        if(isfull[seqIndex]=false){
           sequenceArr[seqIndex]->value = y;
         }
         else{
           linkedListAdd(y,sequenceArr[seqIndex]);    
         }
     }
-    else{
+    else{//Query type 2
         seqIndex=((x^lastAnswer)%n);
         seqSize=linkedListSize(sequenceArr[n]);
         linkListIndex = y%seqSize;
