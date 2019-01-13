@@ -160,6 +160,7 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int queries[5][3
         seqIndex=((x^lastAnswer)%n);
         if(isfull[seqIndex]=false){
           sequenceArr[seqIndex]->value = y;
+	  isfull[seqIndex]=true;
         }
         else{
           linkedListAdd(y,sequenceArr[seqIndex]);    
