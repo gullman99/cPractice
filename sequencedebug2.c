@@ -168,9 +168,9 @@ int* dynamicArray(int n, int queries_rows, int queries_columns, int queries[5][3
     }
     else{//Query type 2
         seqIndex=((x^lastAnswer)%n);
-        seqSize=linkedListSize(sequenceArr[n]);
+        seqSize=linkedListSize(sequenceArr[seqIndex]);
         linkListIndex = y%seqSize;
-        lastAnswer=linkedListAccessValue(linkListIndex,sequenceArr[n]);
+        lastAnswer=linkedListAccessValue(linkListIndex,sequenceArr[seqIndex]);
         printf("%d\n",lastAnswer);
     }
   }
